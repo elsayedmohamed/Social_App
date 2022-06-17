@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "681135123359",
+    "project_id": "scocial-app",
+    "storage_bucket": "scocial-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:681135123359:android:e92f2785076e7cffcbabaa",
+        "android_client_info": {
+          "package_name": "com.example.social_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "681135123359-46h2ci7lag1452826enhshiila6e1ci2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeBbEXb0iGg7MZQTa8mRY2RJcxmtL2DTs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "681135123359-46h2ci7lag1452826enhshiila6e1ci2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
