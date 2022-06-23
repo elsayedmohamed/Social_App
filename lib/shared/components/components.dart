@@ -11,8 +11,7 @@ void NavigateAndFinsh({
         context, MaterialPageRoute(builder: (context) => screen));
 
 void NavigateTo({required BuildContext context, required Widget screen}) {
-  Navigator.pushReplacement(
-      context, MaterialPageRoute(builder: (context) => screen));
+  Navigator.push(context, MaterialPageRoute(builder: (context) => screen));
 }
 
 Widget deaFaultFormField({
@@ -48,22 +47,22 @@ Widget deaFaultFormField({
       ),
     );
 
-Widget dafaultButton({
-  required String text,
-  required Function onpressed,
-}) =>
-    Container(
-      color: defaultColor,
-      width: double.infinity,
-      height: 50.0,
-      child: ElevatedButton(
-        onPressed: onpressed(),
-        child: Text(
-          text,
-          style: const TextStyle(color: Colors.white),
-        ),
-      ),
-    );
+// Widget dafaultButton({
+//   required String text,
+//   required Function onpressed,
+// }) =>
+//     Container(
+//       color: defaultColor,
+//       width: double.infinity,
+//       height: 50.0,
+//       child: ElevatedButton(
+//         onPressed: onpressed(),
+//         child: Text(
+//           text,
+//           style: const TextStyle(color: Colors.white),
+//         ),
+//       ),
+//     );
 
 Widget defaultTextButton({
   required Function() onpressed,
@@ -79,6 +78,26 @@ Widget defaultTextButton({
       ),
     );
 
+// Defaulr AppBar===================================================>
+
+PreferredSizeWidget defaultAppBar({
+  required BuildContext context,
+  String? title,
+  List<Widget>? actions,
+}) =>
+    AppBar(
+      titleSpacing: 5.0,
+      title: Text(title!),
+      actions: actions,
+      leading: IconButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        icon: Icon(Icons.arrow_back_ios),
+      ),
+    );
+
+//=====================================================================
 Widget defaultButton({
   required String text,
   double width = double.infinity,
@@ -219,10 +238,8 @@ Widget buildListProduct(
                           // ShopCubit.get(context).changeFavourites(model.id!);
                           print(1);
                         },
-                        icon: const CircleAvatar(
-                          backgroundColor:
-                              //  ShopCubit.get(context).favourites[model.id] ==
-                              true ? defaultColor : Colors.grey,
+                        icon: CircleAvatar(
+                          backgroundColor: defaultColor,
                           radius: 16.0,
                           child: Icon(
                             Icons.favorite_outline_rounded,

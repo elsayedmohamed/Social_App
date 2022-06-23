@@ -9,11 +9,13 @@ ThemeData lightTheme = ThemeData(
           fontSize: 16.0, fontWeight: FontWeight.bold, color: Colors.black)),
   textTheme: TextTheme(headline3: TextStyle(color: Colors.black)),
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    unselectedLabelStyle: TextStyle(color: Colors.black),
     unselectedItemColor: Colors.grey,
     selectedItemColor: Colors.blue,
   ),
   scaffoldBackgroundColor: HexColor('ffffff'),
   appBarTheme: AppBarTheme(
+    titleTextStyle: TextStyle(color: Colors.black, fontSize: 14.0),
     iconTheme: IconThemeData(color: Colors.blue),
     actionsIconTheme: IconThemeData(color: Colors.black),
     elevation: 0.0,

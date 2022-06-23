@@ -1,60 +1,80 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icofont_flutter/icofont_flutter.dart';
+import 'package:social_app/cubit/states.dart';
+import 'package:social_app/models/post_model.dart';
 import 'package:social_app/shared/components/constants.dart';
+
+import '../../cubit/cubit.dart';
 
 class FeedsScreen extends StatelessWidget {
   const FeedsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Column(
-          children: [
-            Card(
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-              margin: EdgeInsets.all(8.0),
-              elevation: 5.0,
-              child: Stack(
-                  alignment: AlignmentDirectional.bottomEnd,
-                  children: const [
-                    Image(
-                      image: NetworkImage(
-                          'https://live.staticflickr.com/7923/46404545712_6a93faaed4_z.jpg'),
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                      height: 200,
+    return BlocConsumer<SocialCubit, SocialStates>(
+      listener: (context, state) {
+        // TODO: implement listener
+      },
+      builder: (context, state) {
+        return ConditionalBuilder(
+          condition: SocialCubit.get(context).posts.length > 0 &&
+              SocialCubit.get(context).userModel != null,
+          builder: (BuildContext context) => Scaffold(
+            body: SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              child: Column(
+                children: [
+                  Card(
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    margin: EdgeInsets.all(8.0),
+                    elevation: 5.0,
+                    child: Stack(
+                        alignment: AlignmentDirectional.bottomEnd,
+                        children: const [
+                          Image(
+                            image: NetworkImage(
+                                'https://img.freepik.com/free-photo/father-son-having-good-time-park_23-2148684657.jpg?w=740&t=st=1655902427~exp=1655903027~hmac=96fa711d8be97be591edc0742d331c5ae33d2aa12c8a760232e8dcab63e730eb'),
+                            width: double.infinity,
+                            fit: BoxFit.cover,
+                            height: 200,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text(
+                              'Comunications with friends',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ]),
+                  ),
+                  ListView.separated(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) => buildPostItem(
+                        SocialCubit.get(context).posts[index], context, index),
+                    separatorBuilder: (context, index) => SizedBox(
+                      height: 8.0,
                     ),
-                    Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
-                        'Comunications with friends',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ]),
-            ),
-            ListView.separated(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) => buildPostItem(context),
-              separatorBuilder: (context, index) => SizedBox(
-                height: 8.0,
+                    itemCount: SocialCubit.get(context).posts.length,
+                  ),
+                  SizedBox(
+                    height: 8.0,
+                  ),
+                ],
               ),
-              itemCount: 10,
             ),
-            SizedBox(
-              height: 8.0,
-            ),
-          ],
-        ),
-      ),
+          ),
+          fallback: (BuildContext context) =>
+              Center(child: CircularProgressIndicator()),
+        );
+      },
     );
   }
 
 //=============================================================================>
-  Widget buildPostItem(context) => Card(
+  Widget buildPostItem(PostModel model, context, index) => Card(
         clipBehavior: Clip.antiAliasWithSaveLayer,
         margin: const EdgeInsets.symmetric(horizontal: 8.0),
         elevation: 5.0,
@@ -64,10 +84,9 @@ class FeedsScreen extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  const CircleAvatar(
+                  CircleAvatar(
                     radius: 25.0,
-                    backgroundImage: NetworkImage(
-                        'https://cdn.pixabay.com/photo/2016/11/29/20/22/girl-1871104_960_720.jpg'),
+                    backgroundImage: NetworkImage('${model.image}'),
                   ),
                   const SizedBox(
                     width: 15.0,
@@ -77,9 +96,9 @@ class FeedsScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
-                          children: const [
+                          children: [
                             Text(
-                              'Elsayed Mohamed',
+                              '${model.name}',
                               style: TextStyle(
                                   height: 1.5, fontWeight: FontWeight.bold),
                             ),
@@ -94,7 +113,7 @@ class FeedsScreen extends StatelessWidget {
                           ],
                         ),
                         Text(
-                          'Jan 21,2022 at 11:00 am',
+                          '${model.dateTime}',
                           style: Theme.of(context)
                               .textTheme
                               .caption!
@@ -124,7 +143,7 @@ class FeedsScreen extends StatelessWidget {
                 ),
               ),
               Text(
-                'yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyggggggggyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy',
+                '${model.text}',
                 style: Theme.of(context)
                     .textTheme
                     .bodyMedium!
@@ -176,16 +195,16 @@ class FeedsScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
-                width: double.infinity,
-                height: 140,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5.0),
-                    image: const DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(
-                            'https://live.staticflickr.com/7923/46404545712_6a93faaed4_z.jpg'))),
-              ),
+              if (model.postImage != '')
+                Container(
+                  width: double.infinity,
+                  height: 140,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5.0),
+                      image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: NetworkImage('${model.postImage}'))),
+                ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10.0),
                 child: Row(
@@ -204,7 +223,7 @@ class FeedsScreen extends StatelessWidget {
                                 width: 5.0,
                               ),
                               Text(
-                                '120',
+                                '${SocialCubit.get(context).likes[index]}',
                                 style: Theme.of(context).textTheme.caption,
                               ),
                             ],
@@ -253,11 +272,10 @@ class FeedsScreen extends StatelessWidget {
                   Expanded(
                     child: InkWell(
                       child: Row(
-                        children: const [
+                        children: [
                           CircleAvatar(
                             radius: 15.0,
-                            backgroundImage: NetworkImage(
-                                'https://cdn.pixabay.com/photo/2016/11/29/20/22/girl-1871104_960_720.jpg'),
+                            backgroundImage: NetworkImage('${model.image}'),
                           ),
                           SizedBox(
                             width: 15.0,
@@ -288,7 +306,10 @@ class FeedsScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      SocialCubit.get(context).likePosts(
+                          postId: SocialCubit.get(context).postId[index]);
+                    },
                   ),
                 ],
               )

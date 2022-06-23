@@ -1,11 +1,12 @@
 class SocialUserModel {
   String? name;
   String? email;
-  String? phone;
+
   String? uId;
   String? image;
   String? cover;
   String? bio;
+  String? phone;
   bool? isEmailVerified;
 
   SocialUserModel({
@@ -22,11 +23,12 @@ class SocialUserModel {
   SocialUserModel.fromJson(Map<String, dynamic> json) {
     email = json['email'];
     name = json['name'];
-    phone = json['phone'];
     uId = json['uId'];
     image = json['image'];
     cover = json['cover'];
     bio = json['bio'];
+    phone = json['phone'];
+
     isEmailVerified = json['isEmailVerified'];
   }
 
@@ -34,11 +36,11 @@ class SocialUserModel {
     return {
       'email': email,
       'name': name,
-      'phone': phone,
       'uId': uId,
       'image': image,
       'cover': cover,
       'bio': bio,
+      'phone': phone,
       'isEmailVerified': isEmailVerified,
     };
   }

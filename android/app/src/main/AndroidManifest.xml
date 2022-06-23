@@ -1,6 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.social_app">
    <application
+       android:requestLegacyExternalStorage="true"
         android:label="social_app"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">

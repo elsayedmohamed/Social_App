@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icofont_flutter/icofont_flutter.dart';
 import 'package:social_app/cubit/cubit.dart';
 import 'package:social_app/cubit/states.dart';
+import 'package:social_app/moduels/edit_profile/edit_profile_screen.dart';
+import 'package:social_app/shared/components/components.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -14,7 +16,7 @@ class SettingsScreen extends StatelessWidget {
         // TODO: implement listener
       },
       builder: (context, state) {
-        var userModel = SocialCubit.get(context).model;
+        final userModel = SocialCubit.get(context).userModel;
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -35,7 +37,7 @@ class SettingsScreen extends StatelessWidget {
                             topRight: Radius.circular(4.0),
                           ),
                           image: DecorationImage(
-                              image: NetworkImage('${userModel!.cover}'),
+                              image: NetworkImage('${userModel?.cover}'),
                               fit: BoxFit.cover),
                         ),
                       ),
@@ -47,7 +49,7 @@ class SettingsScreen extends StatelessWidget {
                       radius: 65.0,
                       child: CircleAvatar(
                         radius: 60.0,
-                        backgroundImage: NetworkImage('${userModel.image}'),
+                        backgroundImage: NetworkImage('${userModel?.image}'),
                       ),
                     ),
                   ],
@@ -57,14 +59,14 @@ class SettingsScreen extends StatelessWidget {
                 height: 10.0,
               ),
               Text(
-                '${userModel.name}',
+                '${userModel?.name}',
                 style: Theme.of(context).textTheme.headline6,
               ),
               SizedBox(
                 height: 5.0,
               ),
               Text(
-                '${userModel.bio}',
+                '${userModel?.bio}',
                 style: Theme.of(context).textTheme.caption,
               ),
               Padding(
@@ -168,7 +170,9 @@ class SettingsScreen extends StatelessWidget {
                     width: 10.0,
                   ),
                   OutlinedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      NavigateTo(context: context, screen: EditProfileScreen());
+                    },
                     child: Icon(
                       IcoFontIcons.edit,
                       size: 16.0,

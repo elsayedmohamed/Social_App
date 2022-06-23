@@ -49,9 +49,9 @@ class SocialRegisterCubit extends Cubit<SocialRegisterStates> {
       phone: phone,
       uId: uId,
       image:
-          'https://th.bing.com/th/id/R.4cf560081c770d83d840fb143e70818f?rik=mEfWmaAx9XtWUw&riu=http%3a%2f%2fwasse3sadrak.com%2fwp-content%2fuploads%2f2019%2f08%2fAmber-Heard-Johnny-Depp-Samantha-McMillen-768x612.jpg&ehk=7CARm89d7CzfQwxKrziqFncHiKVGoLUw%2bPh4oHEOjus%3d&risl=&pid=ImgRaw&r=0',
+          'https://img.freepik.com/free-photo/teen-girl-portrait-close-up_23-2149231222.jpg?t=st=1655702169~exp=1655702769~hmac=36ca0a65a4995b0c82128364102fdf7c99091a546c60faba30fee4397b6b69f8&w=740',
       cover:
-          'https://th.bing.com/th/id/R.4cf560081c770d83d840fb143e70818f?rik=mEfWmaAx9XtWUw&riu=http%3a%2f%2fwasse3sadrak.com%2fwp-content%2fuploads%2f2019%2f08%2fAmber-Heard-Johnny-Depp-Samantha-McMillen-768x612.jpg&ehk=7CARm89d7CzfQwxKrziqFncHiKVGoLUw%2bPh4oHEOjus%3d&risl=&pid=ImgRaw&r=0',
+          'https://img.freepik.com/free-photo/teen-girl-portrait-close-up_23-2149231204.jpg?w=740',
       bio: 'write your bio',
       isEmailVerified: false,
     );
